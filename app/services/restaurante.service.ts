@@ -13,4 +13,10 @@ export class RestauranteService{
         .map(res => res.json());
         
     }
+
+    getRestaurante(id: String){
+        return this._http.get("http://localhost:8080/slim/restaurantes-api.php/restaurante/" + id)
+        .map(res => res.json());
+        
+    }
 }
