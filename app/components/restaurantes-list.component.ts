@@ -19,6 +19,7 @@ export class RestaurantesListComponent {
     public status: String;
     public errorMessage;
     public loading;
+    public confirmado;
 
     public constructor(private _restauranteService: RestauranteService){}
 
@@ -51,6 +52,35 @@ export class RestaurantesListComponent {
                 }
             }
         );
+    }
+
+    public onBorrarRestaurante(id){
+         this._restauranteService.deleteRestaurante(id)
+        .subscribe(
+            result => {
+                this.status = result.status;
+
+                if(this.status != "success"){
+                    alert("Error en el servidor");
+                }
+                this.getRestaurantes();
+            },
+            error => {
+                this.errorMessage = <any>error;
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+    }
+
+    public onBorrarConfirm(id){
+        this.confirmado = id;
+    }
+
+    public onCancelarConfirm(){
+        this.confirmado = null;
     }
 
     // Ejemplo para interactura con el DOM

@@ -44,8 +44,11 @@ header h1{
     float: left;
 }
 
-.main h1{
+.main{
     padding: 15px;
+}
+
+.main h1{
     color: #444;
 }
 
@@ -95,6 +98,7 @@ header h1{
     text-decoration: none;
     color:white;
     background: #0074D9;
+    cursor: pointer;
 }
 
 .btn-editar{
@@ -162,4 +166,12 @@ header h1{
     background: #1976d2;
     color: white;
     opacity: 0.8;
+}
+
+.seguro{
+    float:left;
+    position:absolute;
+    background: white;
+    padding: 10px;
+    margin-top: -45px;
 }
