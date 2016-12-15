@@ -8,7 +8,9 @@
         <a [routerLink]="['Restaurante', {id: 999999}]" class="btn btn-ver">Ver (No existe)</a>
     </li>
     <li *ngFor="#restaurante of restaurantes" class="restaurante-item">
-        <div class="image"></div>
+        <div class="image">
+            <img width="100%" src="http://localhost:8080/slim/uploads/{{restaurante.imagen}}" *ngIf="restaurante.imagen && restaurante.imagen !== 'null'" />
+        </div>
         <div class="data">
             <h4>{{restaurante.nombre}}</h4>
             <p>{{restaurante.direccion}}</p>

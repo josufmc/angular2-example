@@ -18,6 +18,8 @@ export class RestaurantesAddComponent {
     public status: String;
     public errorMessage;
 
+    public filesToUpload: Array<File>;
+
     public constructor(
         private _restauranteService: RestauranteService,
         private _routeParams: RouteParams,
@@ -57,6 +59,45 @@ export class RestaurantesAddComponent {
 
     public callPrecio(value){
         this.restaurante.precio = value;
+    }
+
+    // *** Meter en un servicio para no duplicar código
+    public resultUpload;
+
+    public fileChangeEvent(fileInput: any){
+        this.filesToUpload = <Array<File>>fileInput.target.files;
+        this.makeFileRequest("http://localhost:8080/slim/restaurantes-api.php/upload-file", [],this.filesToUpload)
+            .then((result) =>{
+                this.resultUpload = result;
+                this.restaurante.imagen =  this.resultUpload.filename;
+                console.log( this.resultUpload.filename);
+            }, (error) =>{
+                console.log(error);
+            });
+    }
+
+    public makeFileRequest(url:string, params:Array<string>, files:Array<File>){
+        return new Promise(
+            (resolve, reject) => {
+                let formData:any = new FormData();
+                let xhr = new XMLHttpRequest();
+                for(let i=0; i< files.length; i++){
+                    formData.append("uploads[]", files[i], files[i].name);
+                }
+
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState == 4 ){
+                        if (xhr.status == 200){
+                            resolve(JSON.parse(xhr.response));
+                        } else {
+                            reject(xhr.response);
+                        }
+                    } 
+                };
+                xhr.open("POST", url, true);
+                xhr.send(formData);
+            }
+        );
     }
 
 }
