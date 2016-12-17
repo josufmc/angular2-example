@@ -1,13 +1,13 @@
 // Importar el núcleo de Angular
-import {Component, OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteConfig, Router} from "angular2/router";
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute, Params} from "@angular/router";
+
 import {RestauranteService} from "../services/restaurante.service";
 import {Restaurante} from "../models/restaurante";
  
 // Decorador component, indicamos en que etiqueta se va a cargar la plantilla
 @Component({
     selector: 'restaurantes-list',
-    directives: [ROUTER_DIRECTIVES],
     templateUrl: 'app/views/restaurantes-list.html',
     providers: [RestauranteService]
 })
@@ -17,11 +17,15 @@ export class RestaurantesListComponent {
     public titulo:String = "Listado de restaurantes";
     public restaurantes: Restaurante[];
     public status: String;
-    public errorMessage;
-    public loading;
-    public confirmado;
+    public errorMessage: any;
+    public loading: any;
+    public confirmado: any;
 
-    public constructor(private _restauranteService: RestauranteService){}
+    public constructor(
+        private _route: ActivatedRoute,
+        private _router: Router,
+        private _restauranteService: RestauranteService
+        ){}
 
     public ngOnInit(){
         this.loading = 'show';
@@ -54,7 +58,7 @@ export class RestaurantesListComponent {
         );
     }
 
-    public onBorrarRestaurante(id){
+    public onBorrarRestaurante(id: any){
          this._restauranteService.deleteRestaurante(id)
         .subscribe(
             result => {
@@ -75,7 +79,7 @@ export class RestaurantesListComponent {
         );
     }
 
-    public onBorrarConfirm(id){
+    public onBorrarConfirm(id: any){
         this.confirmado = id;
     }
 

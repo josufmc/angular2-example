@@ -1,6 +1,7 @@
 // Importar el núcleo de Angular
-import {Component, OnInit} from 'angular2/core';
-import {RouteParams, Router} from "angular2/router";
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute, Params} from "@angular/router";
+
 import {RestauranteService} from "../services/restaurante.service";
 import {Restaurante} from "../models/restaurante";
  
@@ -16,26 +17,19 @@ export class RestaurantesAddComponent {
     public titulo: String = "Crear restaurante";
     public restaurante: Restaurante;
     public status: String;
-    public errorMessage;
+    public errorMessage: any;
 
     public filesToUpload: Array<File>;
 
     public constructor(
         private _restauranteService: RestauranteService,
-        private _routeParams: RouteParams,
-        private _router: Router
+        private _route: ActivatedRoute,
+        private _router: Router,
     ){}
 
     public ngOnInit(){
         console.log("Component restaurante Add cargado");
-        this.restaurante = new Restaurante(
-            0,
-            this._routeParams.get("nombre"),
-            this._routeParams.get("direccion"),
-            this._routeParams.get("descripcion"),
-            "null",
-            "bajo"
-        );
+        this.restaurante = new Restaurante(0, "", "", "", "null", "bajo");
     }
 
     public onSubmit(){
@@ -54,15 +48,15 @@ export class RestaurantesAddComponent {
                 }
             }
         );
-        this._router.navigate(["Home"]);
+        this._router.navigate(["/"]);
     }
 
-    public callPrecio(value){
+    public callPrecio(value: any){
         this.restaurante.precio = value;
     }
 
     // *** Meter en un servicio para no duplicar código
-    public resultUpload;
+    public resultUpload: any;
 
     public fileChangeEvent(fileInput: any){
         this.filesToUpload = <Array<File>>fileInput.target.files;

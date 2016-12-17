@@ -1,6 +1,13 @@
-node_modules/
+.idea
+node_modules
 typings
 jspm_packages
+npm-debug.*
+link-checker-results.txt
 bower_components
 app/**/*.js
-app/**/*.map
+*.js.map
+e2e/**/*.js
+e2e/**/*.js.map
+_test-output
+_temp

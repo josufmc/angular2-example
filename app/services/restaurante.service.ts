@@ -1,5 +1,5 @@
-import {Injectable} from "angular2/core";
-import {Http, Response, Headers} from "angular2/http";
+import {Injectable} from "@angular/core";
+import {Http, Response, Headers} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Observable} from "rxjs/Observable";
 import {Restaurante} from "../models/restaurante";
@@ -14,7 +14,7 @@ export class RestauranteService{
         
     }
 
-    getRestaurante(id: String, random = null){
+    getRestaurante(id: String, random: any = null){
         if (random == null){
             return this._http.get("http://localhost:8080/slim/restaurantes-api.php/restaurante/" + id)
             .map(res => res.json());
