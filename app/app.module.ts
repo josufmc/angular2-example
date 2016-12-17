@@ -10,6 +10,7 @@ import {RestaurantesListComponent} from "./components/restaurantes-list.componen
 import {RestaurantesDetailComponent} from "./components/restaurantes-detail.component";
 import {RestaurantesAddComponent} from "./components/restaurantes-add.component";
 import {RestaurantesEditComponent} from "./components/restaurantes-edit.component";
+import {PruebasPipe} from "./pipes/pruebas.pipe";
 
 @NgModule({
   imports:      [ BrowserModule, HttpModule, FormsModule, routing],
@@ -18,7 +19,8 @@ import {RestaurantesEditComponent} from "./components/restaurantes-edit.componen
       RestaurantesListComponent,
       RestaurantesDetailComponent,
       RestaurantesAddComponent,
-      RestaurantesEditComponent
+      RestaurantesEditComponent,
+      PruebasPipe
     ],
   providers: [ appRoutingProviders],
   bootstrap:    [ AppComponent ]
